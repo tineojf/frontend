@@ -19,16 +19,14 @@ formLogin.addEventListener('submit', (event) => {
   console.log(password);
 
   // todo validar el email espacio en blanco (regex)
-  // valida que email no este vacio
-  if (!email) {
-    spnEmail.textContent = 'Debes ingresar tu email';
-    return;
-  }
-  // valida que password no este vacio
-  if (!password) {
-    spnPassword.textContent = 'Debes ingresar tu contraseña';
-    return;
-  }
-
-  
+  // valida que email & password no este vacio 
+  validateInput(inputEmail, spnEmail, 'email');
+  validateInput(inputPassword, spnPassword, 'contraseña'); 
 });
+
+function validateInput(elemento, contendor, texto) {
+  if (!elemento.value) {
+    contendor.textContent = "Debes ingresar tu " + texto;
+    return;
+  }
+}
