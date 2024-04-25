@@ -18,12 +18,21 @@ formLogin.addEventListener('submit', (event) => {
   console.log(email);
   console.log(password);
 
-  //todo validar el email espacio en blanco (regex)
   //todo añadir colores segun corresponda (rojo, amarillo)
   //todo usuario incorrecto
-  // valida que email & password no este vacio 
+  // valida que email & password no este vacio
   validateInput(inputEmail, spnEmail, 'email');
   validateInput(inputPassword, spnPassword, 'contraseña');
+  
+  //valida el email con regex 
+  if (validateEmail(email)) {
+    console.log('Email valido');
+  } else {
+    spnEmail.classList.add('invalid');
+    spnEmail.classList.add('error');
+    spnEmail.textContent = 'Email invalido';
+  }
+
 });
 
 function validateInput(elemento, contenedor, texto) {
@@ -33,3 +42,10 @@ function validateInput(elemento, contenedor, texto) {
     return;
   }
 }
+
+// validar email con regex
+function validateEmail(email) {
+  const regex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+  return regex.test(email);
+}
+
