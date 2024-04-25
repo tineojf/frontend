@@ -18,15 +18,18 @@ formLogin.addEventListener('submit', (event) => {
   console.log(email);
   console.log(password);
 
-  // todo validar el email espacio en blanco (regex)
+  //todo validar el email espacio en blanco (regex)
+  //todo añadir colores segun corresponda (rojo, amarillo)
+  //todo usuario incorrecto
   // valida que email & password no este vacio 
   validateInput(inputEmail, spnEmail, 'email');
-  validateInput(inputPassword, spnPassword, 'contraseña'); 
+  validateInput(inputPassword, spnPassword, 'contraseña');
 });
 
-function validateInput(elemento, contendor, texto) {
+function validateInput(elemento, contenedor, texto) {
   if (!elemento.value) {
-    contendor.textContent = "Debes ingresar tu " + texto;
+    contenedor.classList.add('error');
+    contenedor.textContent = "Debes ingresar tu " + texto;
     return;
   }
 }
