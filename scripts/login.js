@@ -43,10 +43,13 @@ formLogin.addEventListener('submit', async (event) => {
   };
 
   const data = await hacerLogin(urlAPI, null, 'POST', body);
-  console.log(data);
+  // console.log(data);
 
   //todo guardar el id en localstorage
-  if (data.ok){
+  if (data.ok) {
+    localStorage.clear();
+    localStorage.setItem('user', JSON.stringify(data.user));
+    localStorage.setItem('id', data.user.id);
     window.location.href = '/mis-tareas.html';
   }
 });
@@ -60,6 +63,7 @@ function validateInput(elemento, contenedor, texto) {
 }
 
 // validar email con regex
+//todo añadir estilo
 function validateEmail(email) {
   const regex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
   return regex.test(email);
@@ -69,7 +73,7 @@ async function hacerLogin(_url, _token = null, _method = 'GET', _body = null) {
 
   const options = {
     method: _method,
-    headers: { "Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
   };
 
   if (_token) { options.headers["Authorization"] = "Bearer " + _token; }
